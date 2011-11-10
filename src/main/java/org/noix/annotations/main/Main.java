@@ -1,18 +1,19 @@
 package org.noix.annotations.main;
 
-import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.noix.annotations.extension.Extension;
-import org.noix.annotations.finder.ExtensionsLoader;
-
+import org.noix.annotations.extensions.ExtensionsRunner;
 
 public class Main {
 	public static void main(String[] args) throws InstantiationException,
 			IllegalAccessException {
-		ExtensionsLoader extensionsLoader = new ExtensionsLoader();
-		Set<Extension> extensions = extensionsLoader.getExtensions();
-		for (Extension extension : extensions) {
-			extension.run();
-		}
+		configureLogger();
+		ExtensionsRunner extensionsRunner = new ExtensionsRunner();
+		extensionsRunner.run();
+	}
+
+	private static void configureLogger() {
+		Logger.getLogger("").setLevel(Level.WARNING);
 	}
 }
